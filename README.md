@@ -251,3 +251,98 @@ SELECT
 -- 3.
 FROM
     top_uk_youtubers_2024
+
+--
+
+# Testing 
+
+- What data quality and validation checks are you going to create?
+
+Here are the data quality tests conducted:
+
+## Row count check
+```sql
+/*
+# Count the total number of records (or rows) are in the SQL view
+*/
+
+SELECT
+    COUNT(*) AS no_of_rows
+FROM
+    view_uk_youtubers_2024;
+
+```
+
+![Row count check](assets/images/1_row_count_check.png)
+
+
+
+## Column count check
+### SQL query 
+```sql
+/*
+# Count the total number of columns (or fields) are in the SQL view
+*/
+
+
+SELECT
+    COUNT(*) AS column_count
+FROM
+    INFORMATION_SCHEMA.COLUMNS
+WHERE
+    TABLE_NAME = 'view_uk_youtubers_2024'
+```
+### Output 
+![Column count check](assets/images/2_column_count_check.png)
+
+
+
+## Data type check
+### SQL query 
+```sql
+/*
+# Check the data types of each column from the view by checking the INFORMATION SCHEMA view
+*/
+
+-- 1.
+SELECT
+    COLUMN_NAME,
+    DATA_TYPE
+FROM
+    INFORMATION_SCHEMA.COLUMNS
+WHERE
+    TABLE_NAME = 'view_uk_youtubers_2024';
+```
+### Output
+![Data type check](assets/images/3_data_type_check.png)
+
+
+## Duplicate count check
+### SQL query 
+```sql
+/*
+# 1. Check for duplicate rows in the view
+# 2. Group by the channel name
+# 3. Filter for groups with more than one row
+*/
+
+-- 1.
+SELECT
+    channel_name,
+    COUNT(*) AS duplicate_count
+FROM
+    view_uk_youtubers_2024
+
+-- 2.
+GROUP BY
+    channel_name
+
+-- 3.
+HAVING
+    COUNT(*) > 1;
+```
+### Output
+![Duplicate count check](assets/images/4_duplicate_records_check.png)
+
+# Visualization 
+
