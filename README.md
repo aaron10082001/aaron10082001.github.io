@@ -995,11 +995,13 @@ WHERE
 -- 5. Order by net_profit (from highest to lowest)
 ORDER BY 
     net_profit DESC;
-Output: Most Subscribers
+```
 
-Discovery
-What did we learn?
+**Output**: Most Subscribers
 
-NoCopyrightSounds, DanTDM, and Dan Rhodes are among the channels with the most subscribers in the UK.
-Dan Rhodes is the best option for a product placement campaign due to the highest net profit potential ($1,310,700).
-Entertainment and music-focused channels, such as those analyzed, demonstrate significant reach and engagement, making them ideal for product placement campaigns.
+## Discovery
+**What did we learn?**
+
+- **NoCopyrightSounds, DanTDM, and Dan Rhodes** are among the channels with the most subscribers in the UK.
+- **Dan Rhodes** is the best option for a product placement campaign due to the highest net profit potential ($1,310,700).
+- Entertainment and music-focused channels, such as those analyzed, demonstrate significant reach and engagement, making them ideal for product placement campaigns.
