@@ -297,7 +297,6 @@ WHERE
 ![Column count check](assets/images/2_column_count_check.png)
 
 
-
 ## Data type check
 ### SQL query 
 ```sql
@@ -639,7 +638,7 @@ WHERE
 ORDER BY 
     net_profit DESC;
 ```
-
+![Output](assets/images/youtubers_with_the_most_views.png)
 **Output**: Most Subscribers
 
 ## Conclusion
