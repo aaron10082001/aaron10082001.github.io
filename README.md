@@ -522,5 +522,89 @@ For this analysis, we'll prioritize analysing the metrics that are important in 
 
 
 
+# YouTube Campaign Analysis
 
+## Validation: YouTubers with the Most Subscribers
+
+**Campaign Idea**: Product Placement
+
+### a. Dan Rhodes
+- **Average views per video**: 11.15 million
+- **Product cost**: $5.90
+- **Potential units sold per video**: 11.15 million × 2% conversion rate = 223,000 units sold
+- **Potential revenue per video**: 223,000 × $5.90 = $1,315,700
+- **Campaign cost (one-time fee)**: $5,000
+- **Net profit**: $1,315,700 - $5,000 = $1,310,700
+
+### b. NoCopyrightSounds
+- **Average views per video**: 6.92 million
+- **Product cost**: $5.90
+- **Potential units sold per video**: 6.92 million × 2% conversion rate = 138,400 units sold
+- **Potential revenue per video**: 138,400 × $5.90 = $816,560
+- **Campaign cost (one-time fee)**: $5,000
+- **Net profit**: $816,560 - $5,000 = $811,560
+
+### c. DanTDM
+- **Average views per video**: 5.34 million
+- **Product cost**: $5.90
+- **Potential units sold per video**: 5.34 million × 2% conversion rate = 106,800 units sold
+- **Potential revenue per video**: 106,800 × $5.90 = $630,120
+- **Campaign cost (one-time fee)**: $5,000
+- **Net profit**: $630,120 - $5,000 = $625,120
+
+**Best option from category**: Dan Rhodes
+
+### SQL Query
+```sql
+/*
+1. Define the variables
+2. Create a CTE that rounds the average views per video
+3. Select the columns that are required for the analysis
+4. Filter the results by the YouTube channels with the highest subscriber bases
+5. Order by net_profit (from highest to lowest)
+*/
+
+-- 1. Define variables
+DECLARE @conversionRate FLOAT = 0.02;        -- The conversion rate @ 2%
+DECLARE @productCost MONEY = 5.9;            -- The product cost @ $5.90
+DECLARE @campaignCost MONEY = 5000.0;        -- The campaign cost @ $5,000
+
+-- 2. Create a CTE that rounds the average views per video
+WITH ChannelData AS (
+    SELECT
+        channel_name,
+        total_views,
+        total_videos,
+        ROUND((CAST(total_views AS FLOAT) / total_videos), -4) AS rounded_avg_views_per_video
+    FROM 
+        youtube_db.dbo.view_uk_youtubers_2024
+)
+
+-- 3. Select the columns that are required for the analysis
+SELECT
+    channel_name,
+    rounded_avg_views_per_video,
+    (rounded_avg_views_per_video * @conversionRate) AS potential_units_sold_per_video,
+    (rounded_avg_views_per_video * @conversionRate * @productCost) AS potential_revenue_per_video,
+    (rounded_avg_views_per_video * @conversionRate * @productCost) - @campaignCost AS net_profit
+FROM
+    ChannelData
+
+-- 4. Filter the results by the YouTube channels
+WHERE 
+    channel_name IN ('NoCopyrightSounds', 'DanTDM', 'Dan Rhodes')
+
+-- 5. Order by net_profit (from highest to lowest)
+ORDER BY 
+    net_profit DESC;
+```
+
+**Output**: Most Subscribers
+
+## Discovery
+**What did we learn?**
+
+- **NoCopyrightSounds, DanTDM, and Dan Rhodes** are among the channels with the most subscribers in the UK.
+- **Dan Rhodes** is the best option for a product placement campaign due to the highest net profit potential ($1,310,700).
+- Entertainment and music-focused channels, such as those analyzed, demonstrate significant reach and engagement, making them ideal for product placement campaigns.
 
