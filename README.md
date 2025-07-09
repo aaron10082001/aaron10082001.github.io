@@ -638,8 +638,12 @@ WHERE
 ORDER BY 
     net_profit DESC;
 ```
+
+
+**Output**
+
+
 ![Output](assets/images/youtubers_with_the_most_views.png)
-**Output**: Most Subscribers
 
 ## Conclusion
 **What did we learn?**
